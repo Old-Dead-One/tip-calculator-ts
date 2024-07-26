@@ -1,30 +1,51 @@
-# React + TypeScript + Vite
+# Calculator App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple React application for calculating the tip amount, adding it to the bill and then split the total bill between party members.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Clone the repository:**
 
-## Expanding the ESLint configuration
+   ```
+   git clone git@github.com:Old-Dead-One/tip-calculator-ts.git
+   cd tip-calculator-ts
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. **Install dependencies:**
 
-- Configure the top-level `parserOptions` property like this:
+   ```
+   npm install
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+3. **Run the development server:**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+   ```
+   npm run dev
+   ```
+
+## Code Overview
+
+### `Calculator` Component
+
+This component handles the input, calculation, and display logic for the app.
+
+#### State Variables
+
+- `billAmount`: Stores the bill without tip name.
+- `tipzpercent`: Stores the tipPercent slected by the user.
+- `partSize`: Stores the size of the group to split the bill between.
+- `billPlusTip`: Stores the total bill including tip
+- `partyMemberSHare`: Stores the total bill amount including tip for each party member.
+
+#### Methods
+
+- `handleSelect(e)`: Updates the tipPercent input state when the user changes/selects the amount.
+- `handleSubmit(e)`: Handles the form submission, triggering the calculations for total bill plus tip and the share of the total bill for each party member.
+
+## Usage
+
+1. Open the application in your browser.
+2. Enter the bill amount in the "Total Bill" field.
+3. Select/enter the prefered tip percent.
+4. Click the "Calculate" button.
+5. The application will display the total bill including the tip and the share each member of the party owes.
