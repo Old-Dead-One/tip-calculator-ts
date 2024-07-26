@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import Dropdown from './DropDown';
 import { create, all, BigNumber } from 'mathjs';
 
-const config = { precision: 20 };
+/**
+ * Component for calculating the total bill with tip and each party member's share.s
+ */
+
+// Set the precision to 4 decimal places
+const config = { precision: 4 };
 const math = create(all, config);
 
 const TipCalculator: React.FC = () => {
+    // State variables
     const [billAmount, setBillAmount] = useState<BigNumber>(math.bignumber(0));
     const [tipPercent, setTipPercent] = useState<BigNumber>(math.bignumber(0));
     const [partySize, setPartySize] = useState<BigNumber>(math.bignumber(1));
@@ -18,6 +24,11 @@ const TipCalculator: React.FC = () => {
         { value: '20', label: '20%' },
     ];
 
+
+    /** Handle the selection of the tip percentage
+     * @param selectedOption - The selected option
+     * @returns tipPercent
+     * */
     const handleSelect = (selectedOption: string | number) => {
         if (typeof selectedOption === 'number') {
             setTipPercent(math.bignumber(selectedOption));
@@ -26,6 +37,10 @@ const TipCalculator: React.FC = () => {
         }
     };
 
+    /** Handle the form submission
+     * @param event - The form event
+     * @returns tipPercent and partySize to calculate the total bill with tip and each party member's share
+     * */
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const tipAmount = math.multiply(billAmount, math.divide(tipPercent, 100));
@@ -34,6 +49,7 @@ const TipCalculator: React.FC = () => {
         setPartyMemberShare(math.divide(totalAmount, partySize) as BigNumber);
     };
 
+    // Render the component
     return (
         <div>
             <form onSubmit={handleSubmit}>
